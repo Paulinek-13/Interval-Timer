@@ -1,57 +1,28 @@
 <!DOCTYPE html>
 <html>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  .container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(1fr, 100px));
-    grid-template-rows: repeat(4, minmax(1fr, 100px));
-    grid-gap: 5px;
-    align-items: center;
-    justify-items: center;
-    grid-template-areas:
-      'a b'
-      'c d'
-      'e f'
-      'g h'
-      'i j'
-      'k l'
-      'm n';
-  }
-
-  .container>img:nth-child(1) {
-    grid-area: a/a/d/d;
-  }
-
-  .container>img:nth-child(4) {
-    grid-area: g/g/j/j;
-  }
-
-  .container>img {
-    width: 100%;
-  }
-</style>
 
 <head>
-  <title>TIMER GALLERY</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>TIMER GALLERY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="container">
-    <img src="images/timer_logo.png" />
-    <img src="images/timer_intro.png" />
-    <img src="images/timer_type.png" />
-    <img src="images/timer_menu.png" />
-    <img src="images/timer_count.png" />
-    <img src="images/timer_rest.png" />
-    <img src="images/timer_exercise.png" />
-    <img src="images/timer_win.png" />
-  </div>
+    <div id="menu">
+        <a class="button" id="home" href="index.htm">HOME</a>
+        <a class="button" id="gallery" href="gallery.htm">GALLERY</a>
+        <a class="button" id="gallery" href="index.htm">ABOUT</a>
+    </div>
+    <div class="container">
+        <img src="images/timer_logo.png" />
+        <img src="images/timer_intro.png" />
+        <img src="images/timer_type.png" />
+        <img src="images/timer_menu.png" />
+        <img src="images/timer_count.png" />
+        <img src="images/timer_rest.png" />
+        <img src="images/timer_exercise.png" />
+        <img src="images/timer_win.png" />
+    </div>
 </body>
 
 </html>
