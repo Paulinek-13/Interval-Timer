@@ -1,25 +1,134 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+    * {
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Overpass Mono', monospace;
+    }
+
+    html {
+        font-size: 7vw;
+    }
+
+    body {
+        background-color: rgb(230, 245, 245);
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        flex: 1;
+
+        background-color: rgb(220, 220, 0);
+        margin: 0.2rem 1rem;
+        padding: 0.2rem;
+        font-size: .4rem;
+        text-align: center;
+    }
+
+    a:hover {
+        background-color: rgb(220, 220, 0, .7);
+    }
+
+    h1 {
+        font-family: 'Major Mono Display', monospace;
+
+        background-color: rgb(180, 20, 20);
+        margin: 0.2rem 1rem;
+        padding: 0.2rem;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    h1:hover {
+        background-color: rgb(200, 0, 0, 2);
+    }
+
+    article {
+        background-color: rgb(170, 230, 30);
+        margin: 0.2rem 1rem;
+        padding: 0.5rem;
+        font-size: .2rem;
+        text-align: center;
+    }
+
+    .images {
+        margin: 0.2rem 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(1fr, 100px));
+        grid-template-rows: repeat(4, minmax(1fr, 100px));
+        align-items: center;
+        justify-items: center;
+        grid-template-areas:
+            'a b'
+            'c d'
+            'e f'
+            'g h'
+            'i j'
+            'k l'
+            'm n';
+    }
+
+    .images>img:nth-child(1) {
+        grid-area: a/a/d/d;
+    }
+
+    .images>img:nth-child(4) {
+        grid-area: g/g/j/j;
+    }
+
+    .images>img {
+        width: 100%;
+    }
+</style>
+
 <head>
-    <meta charset="utf-8" />
-    <title>TIMER - home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TIMER</title>
 </head>
 
 <body>
-    <div id="all">
-        <div id="menu">
-            <a class="button" id="home" href="index.html">HOME</a>
-            <a class="button" id="gallery" href="gallery.html">GALLERY</a>
-            <a class="button" id="gallery" href="about.html">ABOUT</a>
-        </div>
-        <div id="menu">
-            <a class="link" href="https://github.com/Paulinek-13/TIMER/releases">DOWNLOAD</a>
-            <a class="link" href="https://github.com/Paulinek-13/TIMER">SOURCE CODE</a>
-        </div>
+
+    <nav>
+        <a href="https://github.com/Paulinek-13/TIMER/releases">DOWNLOAD</a>
+        <a href="https://github.com/Paulinek-13/TIMER">SOURCE CODE</a>
+    </nav>
+
+    <h1>TIMER</h1>
+
+    <article>
+        This simple interval timer was made using Allegro 5 library and writing in C++. It is one of the first programs
+        which
+        Paulinek
+        wrote. So if you have noticed a bug - please report it to the
+        author. Moreover, feel free to criticise any unprofessional mistakes in the code. Anyway, Paulinek hopes you
+        will
+        not experience any problems and Paulinek is open to new ideas related with the app.
+        <br><br><br>
+        Enjoy!
+    </article>
+
+    <div class="images">
+        <img src="images/timer_logo.png" />
+        <img src="images/timer_intro.png" />
+        <img src="images/timer_type.png" />
+        <img src="images/timer_menu.png" />
+        <img src="images/timer_count.png" />
+        <img src="images/timer_rest.png" />
+        <img src="images/timer_exercise.png" />
+        <img src="images/timer_win.png" />
     </div>
+
 </body>
 
 </html>
