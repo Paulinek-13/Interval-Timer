@@ -1,8 +1,8 @@
-// ___ ==================================================
-// ___ file: MyMouse.cpp
-// ___ project: Interval Timer
-// ___ author: Paulina Kalicka
-// ___ ==================================================
+// ==================================================
+// file: MyMouse.cpp
+// project: Interval Timer
+// author: Paulina Kalicka
+// ==================================================
 
 #include "MyMouse.h"
 
@@ -10,7 +10,7 @@
 
 MyMouse::MyMouse()
 {
-	for(unsigned i = 0; i < 20; ++i)
+	for (unsigned i = 0; i < 20; ++i)
 		last_positions[i][0] = last_positions[i][1] = 0;
 	curr_px = curr_py = 0;
 
@@ -20,7 +20,7 @@ MyMouse::~MyMouse() {}
 
 void MyMouse::Draw()
 {
-	for(unsigned i = 0; i < 20; ++i)
+	for (unsigned i = 0; i < 20; ++i)
 		al_draw_filled_circle(last_positions[i][0], last_positions[i][1], 7, al_map_rgba(200, 0, 0, 132));
 	al_draw_filled_circle(curr_px, curr_py, 10, al_map_rgba(0, 0, 0, 132));
 }
@@ -37,9 +37,9 @@ void MyMouse::UpdateCounter(unsigned timer_ticks)
 	counter = timer_ticks % 20;
 
 	timer_counter++;
-	if(timer_counter > 5)
+	if (timer_counter > 5)
 	{
-		for(unsigned i = 0; i < 20; ++i)
+		for (unsigned i = 0; i < 20; ++i)
 		{
 			last_positions[i][0] = curr_px;
 			last_positions[i][1] = curr_py;

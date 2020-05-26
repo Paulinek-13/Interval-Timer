@@ -1,8 +1,8 @@
-// ___ ==================================================
-// ___ file: Button.cpp
-// ___ project: Interval Timer
-// ___ author: Paulina Kalicka
-// ___ ==================================================
+// ==================================================
+// file: Button.cpp
+// project: Interval Timer
+// author: Paulina Kalicka
+// ==================================================
 
 #include "Header.h"
 #include "Button.h"
@@ -35,22 +35,22 @@ Button::Button(float px, float py, float w, float h, bool on, std::string text)
 }
 Button::~Button() {}
 
-void Button::Draw(ALLEGRO_FONT* font)
+void Button::Draw(ALLEGRO_FONT *font)
 {
 	al_draw_filled_rectangle(pos_x, pos_y, pos_x + width, pos_y + height,
 							 al_map_rgb(0, 0, 0));
 	DrawText(font, hovered ? width * 0.9 : width * 0.7, hovered ? height * 0.9 : height * 0.7, 0, pos_x + (width / 2), pos_y + (height / 2), 1,
 			 on ? al_map_rgb(255, 200, 0) : al_map_rgb(200, 0, 0), text);
 
-	if(hovered)
+	if (hovered)
 		al_draw_filled_rectangle(pos_x, pos_y, pos_x + width, pos_y + height,
 								 al_map_rgba(132, 132, 132, 132));
 }
 void Button::CheckIfHovered(float mx, float my)
 {
-	if((mx > pos_x) && (mx < pos_x + width))
+	if ((mx > pos_x) && (mx < pos_x + width))
 	{
-		if((my > pos_y) && (my < pos_y + height))
+		if ((my > pos_y) && (my < pos_y + height))
 		{
 			this->hovered = true;
 			return;

@@ -1,8 +1,8 @@
-// ___ ==================================================
-// ___ file: Input.h
-// ___ project: Interval Timer
-// ___ author: Paulina Kalicka
-// ___ ==================================================
+// ==================================================
+// file: Input.h
+// project: Interval Timer
+// author: Paulina Kalicka
+// ==================================================
 
 #ifndef INPUT_H
 #define INPUT_H
@@ -11,7 +11,7 @@
 
 #include "Button.h"
 
-class Input :public Button
+class Input : public Button
 {
 public:
 	Input();
@@ -22,10 +22,11 @@ public:
 
 	std::string str_value;
 
-	void Draw(ALLEGRO_FONT* font);
+	void Draw(ALLEGRO_FONT *font);
+	void ChangeValue(int value);
 
 	// returns true if typing is finished
-	bool KeysInput(ALLEGRO_EVENT& event, ALLEGRO_SAMPLE* sample);
+	bool KeysInput(ALLEGRO_EVENT &event, ALLEGRO_SAMPLE *sample);
 	// returns false if value is not valid
 	bool ConfirmInput();
 };

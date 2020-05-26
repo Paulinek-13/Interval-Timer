@@ -1,8 +1,8 @@
-// ___ ==================================================
-// ___ file: Button.h
-// ___ project: Interval Timer
-// ___ author: Paulina Kalicka
-// ___ ==================================================
+// ==================================================
+// file: Button.h
+// project: Interval Timer
+// author: Paulina Kalicka
+// ==================================================
 
 #ifndef BUTTON_H
 #define BUTTON_H

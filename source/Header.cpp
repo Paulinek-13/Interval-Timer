@@ -1,19 +1,21 @@
-// ___ ==================================================
-// ___ file: Header.cpp
-// ___ project: Interval Timer
-// ___ author: Paulina Kalicka
-// ___ ==================================================
+// ==================================================
+// file: Header.cpp
+// project: Interval Timer
+// author: Paulina Kalicka
+// ==================================================
 
 #include "Header.h"
 
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
 
-void PopUp::Draw(ALLEGRO_FONT* font)
+#include <fstream>
+
+void PopUp::Draw(ALLEGRO_FONT *font)
 {
-	if(draw)
+	if (draw)
 	{
-		if(px < 400)
+		if (px < 400)
 		{
 			al_draw_filled_rectangle(px, py, px + width, py + 100, al_map_rgb(132, 0, 0));
 			DrawText(font, width * 0.9, 50, 0, px + (width / 2), py + 50, 1, al_map_rgb(255, 255, 255), text);
@@ -30,11 +32,11 @@ void PopUp::Update(float mx, float my)
 	this->px = mx;
 	this->py = my;
 
-	if(button_ptr && (button_ptr->hovered))
+	if (button_ptr && (button_ptr->hovered))
 		return;
 	draw = false;
 }
-void PopUp::New(std::string text, float width, Button* button_ptr)
+void PopUp::New(std::string text, float width, Button *button_ptr)
 {
 	this->text = text;
 	this->draw = true;
@@ -42,7 +44,7 @@ void PopUp::New(std::string text, float width, Button* button_ptr)
 	this->button_ptr = button_ptr;
 }
 
-void DrawText(ALLEGRO_FONT* font, float width, float height, float theta, float pos_x, float pos_y,
+void DrawText(ALLEGRO_FONT *font, float width, float height, float theta, float pos_x, float pos_y,
 			  bool centre, ALLEGRO_COLOR color, std::string text)
 {
 	float text_width = al_get_text_width(font, text.c_str());
@@ -67,7 +69,7 @@ void DrawText(ALLEGRO_FONT* font, float width, float height, float theta, float 
 	al_compose_transform(&t, &prev_t);
 	al_use_transform(&t);
 
-	if(centre)
+	if (centre)
 	{
 		float font_h = al_get_font_line_height(font);
 		al_draw_textf(font, color, pos_x, pos_y - (font_h / 2), ALLEGRO_ALIGN_CENTER, "%s", text.c_str());
@@ -81,7 +83,7 @@ void DrawText(ALLEGRO_FONT* font, float width, float height, float theta, float 
 }
 
 // resize display in appropriative way
-void TransformDisplay(ALLEGRO_DISPLAY* display)
+void TransformDisplay(ALLEGRO_DISPLAY *display)
 {
 	al_acknowledge_resize(display);
 
@@ -93,12 +95,12 @@ void TransformDisplay(ALLEGRO_DISPLAY* display)
 
 	al_identity_transform(&t);
 	al_scale_transform(&t, scale, scale);
-	if(scale == scaleX)
+	if (scale == scaleX)
 	{
 		float y = (al_get_display_height(display) / 2) - (DISPLAY_HEIGHT * scale * 0.5f);
 		al_translate_transform(&t, 0, y);
 	}
-	else if(scale == scaleY)
+	else if (scale == scaleY)
 	{
 		float x = (al_get_display_width(display) / 2) - (DISPLAY_WIDTH * scale * 0.5f);
 		al_translate_transform(&t, x, 0);
@@ -106,7 +108,7 @@ void TransformDisplay(ALLEGRO_DISPLAY* display)
 	al_use_transform(&t);
 }
 // transform mouse coordinates
-void TransformMouse(float* mx, float* my)
+void TransformMouse(float *mx, float *my)
 {
 	ALLEGRO_TRANSFORM t;
 	al_copy_transform(&t, al_get_current_transform());
@@ -114,12 +116,12 @@ void TransformMouse(float* mx, float* my)
 	al_transform_coordinates(&t, mx, my);
 }
 
-void ChooseMusicFile(App* app, bool is_playing)
+void ChooseMusicFile(App *app, bool is_playing)
 {
-	ALLEGRO_FILECHOOSER* filechooser;
+	ALLEGRO_FILECHOOSER *filechooser;
 
 	filechooser = al_create_native_file_dialog(0, "Choose your music file (.ogg)", "*.*;*.ogg;", 1);
-	if(!filechooser)
+	if (!filechooser)
 	{
 		al_show_native_message_box(0, "ERROR", "Failed to create native file dialog", "", 0, ALLEGRO_MESSAGEBOX_ERROR);
 	}
@@ -127,13 +129,13 @@ void ChooseMusicFile(App* app, bool is_playing)
 	{
 		al_show_native_file_dialog(app->display, filechooser);
 		unsigned num_files = al_get_native_file_dialog_count(filechooser);
-		if(num_files == 1)
+		if (num_files == 1)
 		{
-			const char* path = al_get_native_file_dialog_path(filechooser, 0);
+			const char *path = al_get_native_file_dialog_path(filechooser, 0);
 			al_destroy_audio_stream(app->audio_stream);
 			app->audio_stream = 0;
 			app->audio_stream = al_load_audio_stream(path, 2, 2048);
-			if(!app->audio_stream)
+			if (!app->audio_stream)
 			{
 				al_show_native_message_box(0, "ERROR", "", "Failed to load your music file", 0, ALLEGRO_MESSAGEBOX_ERROR);
 			}
@@ -145,26 +147,29 @@ void ChooseMusicFile(App* app, bool is_playing)
 				al_set_audio_stream_playing(app->audio_stream, is_playing);
 			}
 		}
-		else if(num_files > 1)
+		else if (num_files > 1)
 			al_show_native_message_box(0, "WARN", "", "You can pick only one music file", 0, ALLEGRO_MESSAGEBOX_WARN);
-		else al_show_native_message_box(0, "OK", "", "If you do not have .ogg music\nyou can always convert it", 0, ALLEGRO_MESSAGEBOX_OK_CANCEL);
+		else
+			al_show_native_message_box(0, "OK", "", "If you do not have .ogg music\nyou can always convert it", 0, ALLEGRO_MESSAGEBOX_OK_CANCEL);
 	}
 
 	al_destroy_native_file_dialog(filechooser);
 }
 
-bool SaveSettings(App* app)
+bool SaveSettings(App *app)
 {
-	if(app)
+	if (app)
 	{
 		std::ofstream out_file;
-		out_file.open("settings.txt");
-		if(out_file.is_open())
+		out_file.open("data//settings.txt");
+		if (out_file.is_open())
 		{
-			out_file << "TIMER-PAULINEK-SETTINGS\n";
-			out_file << "volume " << app->volume << "\n";
-			out_file << "volume_sounds " << app->volume_sounds << "\n";
-			out_file << "play_sounds " << app->play_sounds << "\n";
+			out_file << app->volume << "\n";
+			out_file << app->volume_sounds << "\n";
+			out_file << app->play_sounds << "\n";
+			out_file << app->time_exercise << "\n";
+			out_file << app->time_rest << "\n";
+			out_file << app->sets << "\n";
 
 			out_file.close();
 
@@ -174,39 +179,53 @@ bool SaveSettings(App* app)
 
 	return false;
 }
-bool LoadSettings(App* app)
+bool LoadSettings(App *app)
 {
-	if(app)
+	if (app)
 	{
 		std::ifstream in_file;
-		in_file.open("settings.txt");
-		if(in_file.is_open())
+		in_file.open("data//settings.txt");
+		if (in_file.is_open())
 		{
-			const unsigned short NUM_VALUES = 6;
-			double values[3] {};
-
-			std::string str = "";
-			in_file >> str;
-
-			if(str == "TIMER-PAULINEK-SETTINGS")
 			{
-				for(unsigned i = 0; i < 3; ++i)
-				{
-					in_file >> str;
-					in_file >> values[i];
-				}
-
-				if((values[0] >= MIN_VOLUME) && (values[0] <= MAX_VOLUME))
-					app->volume = float(values[0]);
-				if((values[1] >= MIN_VOLUME) && (values[1] <= MAX_VOLUME))
-					app->volume_sounds = float(values[1]);
-				if(values[2] >= 0)
-					app->play_sounds = bool(values[2]);
-
-				in_file.close();
-
-				return true;
+				float volume;
+				in_file >> volume;
+				if ((volume >= MIN_VOLUME) && (volume <= MAX_VOLUME))
+					app->volume = volume;
 			}
+			{
+				float volume_sounds;
+				in_file >> volume_sounds;
+				if ((volume_sounds >= MIN_VOLUME) && (volume_sounds <= MAX_VOLUME))
+					app->volume_sounds = volume_sounds;
+			}
+			{
+				bool play_sounds;
+				in_file >> play_sounds;
+				app->play_sounds = play_sounds;
+			}
+			{
+				int time_exercise;
+				in_file >> time_exercise;
+				if ((time_exercise >= 0) && (time_exercise < 9999))
+					app->time_exercise = time_exercise;
+			}
+			{
+				int time_rest;
+				in_file >> time_rest;
+				if ((time_rest >= 0) && (time_rest < 9999))
+					app->time_rest = time_rest;
+			}
+			{
+				int sets;
+				in_file >> sets;
+				if ((sets >= 0) && (sets < 9999))
+					app->sets = sets;
+			}
+
+			in_file.close();
+
+			return true;
 		}
 	}
 
