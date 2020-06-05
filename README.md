@@ -13,8 +13,8 @@ This is a really useful interval timer written in C++ and Allegro 5 library by P
 - Used library: [Allegro 5](https://liballeg.org/)
 - Timer icon by Becris . from [Iconfinder](https://www.iconfinder.com/becris)
 - Intro sample by mikepro from [Freesound](https://freesound.org/)
-- Sound effects obtained from [Kenny](https://kenney.nl/)
-- Font Pixel Square downloaded from [Kenny](https://kenney.nl/)
+- Sound effects obtained from [Kenney](https://kenney.nl/)
+- Font Pixel Square downloaded from [Kenney](https://kenney.nl/)
 
 ## Notes
 
